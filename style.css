@@ -289,3 +289,41 @@ ul li a:hover {
   position: relative;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
+
+/* Navbar layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+/* Logo on the left */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Menu items on the right */
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
