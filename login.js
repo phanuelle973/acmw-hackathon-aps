@@ -11,7 +11,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     if (storedUser && storedUser.email === email && storedUser.password === password) {
       alert('Login successful');
       // Redirect to the main app or dashboard
-      window.location.href = 'index.html';
+      window.location.href = 'acmw.html';
     } else {
       alert('Invalid email or password');
     }
