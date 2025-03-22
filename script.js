@@ -30,6 +30,47 @@ document.querySelectorAll("#habit-list input").forEach((checkbox) => {
   if (saved === "true") checkbox.checked = true;
 });
 
+const addHabitButton = document.getElementById('add-habit-button');
+const newHabitInput = document.getElementById('new-habit-input');
+const habitList = document.getElementById('habit-list');
+
+// Get saved habits from localStorage
+let habits = JSON.parse(localStorage.getItem('habits')) || [];
+
+// Function to display the habits in the list
+function displayHabits() {
+  habitList.innerHTML = ''; // Clear current list
+  habits.forEach(habit => {
+    const li = document.createElement('li');
+    li.innerHTML = `<label>
+      <input type="checkbox" data-habit="${habit}" />
+      <i class="fas fa-check"></i> ${habit}
+    </label>`;
+    habitList.appendChild(li);
+  });
+}
+
+// Function to add a new habit
+addHabitButton.addEventListener('click', () => {
+  const newHabit = newHabitInput.value.trim();
+
+  if (newHabit && !habits.includes(newHabit)) {
+    habits.push(newHabit);  // Add new habit to the habits array
+    localStorage.setItem('habits', JSON.stringify(habits));  // Save to localStorage
+    newHabitInput.value = '';  // Clear the input field
+    displayHabits();  // Refresh the displayed list
+  } else if (!newHabit) {
+    alert('Please enter a habit!');
+  } else {
+    alert('This habit already exists!');
+  }
+});
+
+// Initialize habit list display on page load
+document.addEventListener('DOMContentLoaded', () => {
+  displayHabits();  // Display saved habits when the page loads
+});
+
 // Summary section
 function updateSummary() {
   document.getElementById("saved-mood").textContent =
