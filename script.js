@@ -27,6 +27,47 @@ function updateSummary() {
     localStorage.getItem(`journal-${today}`) || "-";
 }
 
+const addHabitButton = document.getElementById('add-habit-button');
+const newHabitInput = document.getElementById('new-habit-input');
+const habitList = document.getElementById('habit-list');
+
+// Get saved habits from localStorage
+let habits = JSON.parse(localStorage.getItem('habits')) || [];
+
+// Function to display habits in the list
+function displayHabits() {
+  habitList.innerHTML = '';  // Clear current list
+  habits.forEach(habit => {
+    const li = document.createElement('li');
+    li.innerHTML = `<label>
+      <input type="checkbox" data-habit="${habit}" />
+      <i class="fas fa-check"></i> ${habit}
+    </label>`;
+    habitList.appendChild(li);
+  });
+}
+
+// Function to add a new habit
+addHabitButton.addEventListener('click', () => {
+  const newHabit = newHabitInput.value.trim();
+
+  if (newHabit && !habits.includes(newHabit)) {
+    habits.push(newHabit);  // Add new habit to the habits array
+    localStorage.setItem('habits', JSON.stringify(habits));  // Save to localStorage
+    newHabitInput.value = '';  // Clear the input field
+    displayHabits();  // Refresh the displayed list
+  } else if (!newHabit) {
+    alert('Please enter a habit!');
+  } else {
+    alert('This habit already exists!');
+  }
+});
+
+// Initialize habit list display on page load
+document.addEventListener('DOMContentLoaded', () => {
+  displayHabits();  // Display saved habits when the page loads
+});
+
 // Mood Calendar
 function renderCalendar() {
   const grid = document.getElementById("calendar-grid");
@@ -47,6 +88,9 @@ function renderCalendar() {
     dayDiv.title = `Mood on ${dateKey}`;
     grid.appendChild(dayDiv);
   }
+  dayDiv.addEventListener("click", () => {
+    showDayDetails(dateKey); // function that opens a modal or details view
+  });
 }
 
 // Theme switcher (class-based version)
@@ -66,6 +110,29 @@ themeSelect.addEventListener("change", () => {
 const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
+
+function showDayDetails(dateKey) {
+  const mood = localStorage.getItem(`mood-${dateKey}`) || "No mood recorded";
+  const journal = localStorage.getItem(`journal-${dateKey}`) || "No journal entry";
+  const habits = ["Drink Water", "Read", "Exercise"]; // or your dynamic list
+
+  const completed = habits.filter(habit => {
+    return localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+  });
+
+  // Show in alert for now (we can upgrade this to a modal)
+  alert(
+    `📅 Date: ${dateKey}\n\n` +
+    `😊 Mood: ${mood}\n\n` +
+    `📝 Journal:\n${journal}\n\n` +
+    `✅ Habits Completed:\n${completed.join("\n") || "None"}`
+  );
+}
+
+const habitKey = `habit-${today}-${habitName}`;
+localStorage.setItem(habitKey, isChecked);
+
+
 
 // Load content
 updateSummary();
