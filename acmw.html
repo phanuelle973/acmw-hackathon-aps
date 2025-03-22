@@ -9,21 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HackTracker</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-  <script src="login.js" defer></script>
-  <a href="about.html">About</a>
-  <a href="login.html">Login</a>
-  </head>
+</head>
 <body>
 
-  <nav>
-    <ul class="menu">
-      <li><a href="acmw.html">Home</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
+  <!-- Add this to the body of your index.html, where you'd like the button to appear -->
+<button onclick="window.location.href='login.html'">Login</button>
 
+<!-- Add this to the body of your index.html -->
+<p>Already have an account? <a href="login.html">Login here</a></p>
 
   
   <div class="theme-selector">
@@ -43,22 +36,52 @@
         <option value="😐">😐 Neutral</option>
         <option value="😢">😢 Sad</option>
         <option value="😠">😠 Angry</option>
-      </select>           
+      </select>
     </section>
 
     <section id="habit-section">
-      <h2>Habit Tracker</h2>
-      <ul id="habit-list">
-        <!-- Habit items will be added dynamically here -->
-      </ul>
-  
-      <!-- Form to add new habit -->
-      <input type="text" id="new-habit-input" placeholder="Enter a new habit" />
-      <button id="add-habit-button">Add Habit</button>
+      <h2>Habit Checklist</h2>
+        <ul id="habit-list">
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Drink Water" />
+              <i class="fas fa-water"></i> Drink Water
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Read" />
+              <i class="fas fa-book"></i> Read
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Exercise" />
+              <i class="fas fa-dumbbell"></i> Exercise
+            </label>
+          </li>
+        </ul>
+    </section>
+
+    <section id="journal-section">
+      <h2>Daily Journal</h2>
+      <textarea id="journal-entry" placeholder="Write about your day..."></textarea>
+      <button id="save-journal">Save Entry</button>
+    </section>
+
+    <section id="summary-section">
+      <h2>Saved for Today</h2>
+      <p><strong>Mood:</strong> <span id="saved-mood">-</span></p>
+      <p><strong>Journal:</strong> <span id="saved-journal">-</span></p>
+    </section>
+
+    <section id="calendar-section">
+      <h2>Mood Calendar</h2>
+      <div id="calendar-grid"></div>
     </section>
 
   </div>
 
-  
+  <script src="script.js"></script>
 </body>
 </html>
