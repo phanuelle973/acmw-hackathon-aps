@@ -351,7 +351,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
       const dayDate = new Date(year, month, day);
       dayDate.setHours(0, 0, 0, 0);
-  
+
+      const dayDate = new Date(year, month, day);
+      dayDate.setHours(0, 0, 0, 0);
+      
+      if (dayDate.getTime() === now.getTime()) {
+        dayDiv.classList.add("today");
+      }
+        
       if (dayDate <= now) {
         dayDiv.addEventListener("click", () => showDayDetails(dateKey));
       } else {

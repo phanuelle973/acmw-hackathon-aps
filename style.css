@@ -201,7 +201,7 @@ ul li a:hover {
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.6rem;
   cursor: pointer;
 }
 
@@ -216,6 +216,14 @@ ul li a:hover {
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
+
+.calendar-day.today {
+  border: 2px solid var(--accent-color);
+  font-weight: bold;
+  background-color: #fff8e1; /* soft yellow highlight */
+}
+
+
 .calendar-day.disabled-day {
   opacity: 0.5;
   cursor: not-allowed;
