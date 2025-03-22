@@ -1,6 +1,8 @@
 const today = new Date().toISOString().split("T")[0];
 
-// Mood tracker
+// =========================
+// Mood Tracker
+// =========================
 const moodSelect = document.getElementById("mood-select");
 moodSelect.addEventListener("change", () => {
   const selectedMood = moodSelect.value;
@@ -9,7 +11,9 @@ moodSelect.addEventListener("change", () => {
   renderCalendar();
 });
 
+// =========================
 // Journal
+// =========================
 const journalEntry = document.getElementById("journal-entry");
 const saveJournal = document.getElementById("save-journal");
 
@@ -19,7 +23,9 @@ saveJournal.addEventListener("click", () => {
   journalEntry.value = "";
 });
 
-// Summary updater
+// =========================
+// Summary Updater
+// =========================
 function updateSummary() {
   document.getElementById("saved-mood").textContent =
     localStorage.getItem(`mood-${today}`) || "-";
@@ -27,25 +33,26 @@ function updateSummary() {
     localStorage.getItem(`journal-${today}`) || "-";
 }
 
-// Get current date key
-const today = new Date().toISOString().split("T")[0];
-
-// Get elements for the habit tracker
+// =========================
+// Habit Tracker
+// =========================
 const addHabitButton = document.getElementById('add-habit-button');
 const newHabitInput = document.getElementById('new-habit-input');
 const habitList = document.getElementById('habit-list');
 
-// Get saved habits from localStorage
 let habits = JSON.parse(localStorage.getItem('habits')) || [];
 
-// Function to display habits in the list
 function displayHabits() {
-  habitList.innerHTML = '';  // Clear current list
+  habitList.innerHTML = '';
   habits.forEach((habit, index) => {
     const li = document.createElement('li');
+    const dateKey = today;
+
+    const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+
     li.innerHTML = `
       <label>
-        <input type="checkbox" data-habit="${habit}" />
+        <input type="checkbox" data-habit="${habit}" ${isChecked ? "checked" : ""} />
         <i class="fas fa-check"></i> ${habit}
       </label>
       <button class="delete-habit" data-index="${index}">❌</button>
@@ -54,26 +61,35 @@ function displayHabits() {
     habitList.appendChild(li);
   });
 
-  // Attach delete functionality to each delete button
+  // Delete habit logic
   document.querySelectorAll('.delete-habit').forEach(button => {
     button.addEventListener('click', (event) => {
       const habitIndex = event.target.dataset.index;
-      habits.splice(habitIndex, 1);  // Remove habit from array
-      localStorage.setItem('habits', JSON.stringify(habits));  // Update storage
-      displayHabits();  // Refresh list
+      habits.splice(habitIndex, 1);
+      localStorage.setItem('habits', JSON.stringify(habits));
+      displayHabits();
+    });
+  });
+
+  // Save habit checkbox status
+  document.querySelectorAll('#habit-list input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', (event) => {
+      const habitName = event.target.dataset.habit;
+      const isChecked = event.target.checked;
+      const dateKey = today;
+      localStorage.setItem(`habit-${dateKey}-${habitName}`, isChecked);
     });
   });
 }
 
-// Function to add a new habit
 addHabitButton.addEventListener('click', () => {
   const newHabit = newHabitInput.value.trim();
 
   if (newHabit && !habits.includes(newHabit)) {
-    habits.push(newHabit);  // Add new habit to the habits array
-    localStorage.setItem('habits', JSON.stringify(habits));  // Save to localStorage
-    newHabitInput.value = '';  // Clear the input field
-    displayHabits();  // Refresh the displayed list
+    habits.push(newHabit);
+    localStorage.setItem('habits', JSON.stringify(habits));
+    newHabitInput.value = '';
+    displayHabits();
   } else if (!newHabit) {
     alert('Please enter a habit!');
   } else {
@@ -81,12 +97,13 @@ addHabitButton.addEventListener('click', () => {
   }
 });
 
-// Initialize habit list display on page load
 document.addEventListener('DOMContentLoaded', () => {
-  displayHabits();  // Display saved habits when the page loads
+  displayHabits();
 });
 
+// =========================
 // Mood Calendar
+// =========================
 function renderCalendar() {
   const grid = document.getElementById("calendar-grid");
   grid.innerHTML = "";
@@ -102,18 +119,41 @@ function renderCalendar() {
 
     const dayDiv = document.createElement("div");
     dayDiv.className = "calendar-day";
-    dayDiv.textContent = `${day}\n${mood}`;
+    dayDiv.innerHTML = `
+      <div class="calendar-date">${day}</div>
+      <div class="calendar-mood">${mood}</div>
+    `;
     dayDiv.title = `Mood on ${dateKey}`;
+
+    dayDiv.addEventListener("click", () => {
+      showDayDetails(dateKey);
+    });
+
     grid.appendChild(dayDiv);
   }
-  dayDiv.addEventListener("click", () => {
-    showDayDetails(dateKey); // function that opens a modal or details view
-  });
 }
 
+// =========================
+// View Day Details
+// =========================
+function showDayDetails(dateKey) {
+  const mood = localStorage.getItem(`mood-${dateKey}`) || "No mood recorded";
+  const journal = localStorage.getItem(`journal-${dateKey}`) || "No journal entry";
+  const completed = habits.filter(habit => {
+    return localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+  });
 
+  alert(
+    `📅 Date: ${dateKey}\n\n` +
+    `😊 Mood: ${mood}\n\n` +
+    `📝 Journal:\n${journal}\n\n` +
+    `✅ Habits Completed:\n${completed.join("\n") || "None"}`
+  );
+}
 
-// Theme switcher (class-based version)
+// =========================
+// Theme Switching
+// =========================
 const themeSelect = document.getElementById("theme-select");
 
 function applyTheme(theme) {
@@ -126,34 +166,13 @@ function applyTheme(theme) {
 themeSelect.addEventListener("change", () => {
   applyTheme(themeSelect.value);
 });
- 
+
 const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
 
-function showDayDetails(dateKey) {
-  const mood = localStorage.getItem(`mood-${dateKey}`) || "No mood recorded";
-  const journal = localStorage.getItem(`journal-${dateKey}`) || "No journal entry";
-  const habits = ["Drink Water", "Read", "Exercise"]; // or your dynamic list
-
-  const completed = habits.filter(habit => {
-    return localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
-  });
-
-  // Show in alert for now (we can upgrade this to a modal)
-  alert(
-    `📅 Date: ${dateKey}\n\n` +
-    `😊 Mood: ${mood}\n\n` +
-    `📝 Journal:\n${journal}\n\n` +
-    `✅ Habits Completed:\n${completed.join("\n") || "None"}`
-  );
-}
-
-const habitKey = `habit-${today}-${habitName}`;
-localStorage.setItem(habitKey, isChecked);
-
-
-
-// Load content
+// =========================
+// Load on Startup
+// =========================
 updateSummary();
 renderCalendar();
