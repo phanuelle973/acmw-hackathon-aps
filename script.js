@@ -90,19 +90,26 @@ document.addEventListener("DOMContentLoaded", displayHabits);
 // =========================
 // Mood Calendar
 // =========================
+// Track which month is being viewed
+let calendarDate = new Date(); // starts as current date
+
 function renderCalendar() {
   const grid = document.getElementById("calendar-grid");
+  const monthLabel = document.getElementById("month-label");
   grid.innerHTML = "";
 
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Update label (e.g., March 2025)
+  const monthName = calendarDate.toLocaleString("default", { month: "long" });
+  monthLabel.textContent = `${monthName} ${year}`;
 
   for (let day = 1; day <= daysInMonth; day++) {
     const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-  
+
     const dayDiv = document.createElement("div");
     dayDiv.className = "calendar-day";
     dayDiv.innerHTML = `
@@ -110,21 +117,23 @@ function renderCalendar() {
       <div class="calendar-mood">${mood}</div>
     `;
     dayDiv.title = `Mood on ${dateKey}`;
-  
-    // ✅ Compare using actual Date objects
+
+    // ✅ Compare actual date objects
     const dayDate = new Date(year, month, day);
     const now = new Date();
     dayDate.setHours(0, 0, 0, 0);
     now.setHours(0, 0, 0, 0);
-  
+
     if (dayDate <= now) {
+      // Past or today → clickable
       dayDiv.addEventListener("click", () => {
         showDayDetails(dateKey);
       });
     } else {
+      // Future → visually dim and not clickable
       dayDiv.classList.add("disabled-day");
     }
-  
+
     grid.appendChild(dayDiv);
   }
 }
@@ -177,42 +186,6 @@ const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
 
-// Track which month is being viewed
-let calendarDate = new Date(); // starts as current date
-
-function renderCalendar() {
-  const grid = document.getElementById("calendar-grid");
-  const monthLabel = document.getElementById("month-label");
-  grid.innerHTML = "";
-
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  // Update label (e.g., March 2025)
-  const monthName = calendarDate.toLocaleString("default", { month: "long" });
-  monthLabel.textContent = `${monthName} ${year}`;
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "calendar-day";
-    dayDiv.innerHTML = `
-      <div class="calendar-date">${day}</div>
-      <div class="calendar-mood">${mood}</div>
-    `;
-    dayDiv.title = `Mood on ${dateKey}`;
-
-    // Click to view/edit that day’s data
-    dayDiv.addEventListener("click", () => {
-      showDayDetails(dateKey);
-    });
-
-    grid.appendChild(dayDiv);
-  }
-}
 
 
 // =========================
