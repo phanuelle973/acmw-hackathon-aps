@@ -186,6 +186,28 @@ const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
 
+const deleteButton = document.getElementById("delete-entry");
+
+deleteButton.addEventListener("click", () => {
+  if (!currentEditDate) return;
+
+  // Delete mood and journal
+  localStorage.removeItem(`mood-${currentEditDate}`);
+  localStorage.removeItem(`journal-${currentEditDate}`);
+
+  // Delete any associated habits for that day
+  habits.forEach(habit => {
+    localStorage.removeItem(`habit-${currentEditDate}-${habit}`);
+  });
+
+  modal.classList.add("hidden");
+  renderCalendar();
+
+  // Optional: Clear modal fields
+  modalMood.value = "";
+  modalJournal.value = "";
+  modalHabitList.innerHTML = "";
+});
 
 
 // =========================
