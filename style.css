@@ -10,11 +10,14 @@ body {
 
 /* Menu Bar Styles */
 nav {
-  background-color: var(--accent-color);  /* Make it theme-dependent */
-  padding: 15px 20px;
+  background-color: var(--accent-color); /* Use theme accent color */
+  padding: 15px;
   text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  border-radius: 8px;  /* Rounded corners */
+}
+
+.menu-container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .menu {
@@ -23,7 +26,7 @@ nav {
   margin: 0;
   display: flex;
   justify-content: center;
-  gap: 20px;  /* Space between menu items */
+  gap: 20px;
 }
 
 .menu li {
@@ -33,13 +36,11 @@ nav {
 .menu a {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;  /* Slightly bigger font */
+  font-size: 18px;
   font-weight: 600;
-  transition: color 0.3s ease;
 }
 
 .menu a:hover {
-  color: var(--text-color);  /* Hover effect that matches text color */
   text-decoration: underline;
 }
 
@@ -143,6 +144,11 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  font-size: 1.5rem;
+  color: var(--text-color); /* Match text color to theme */
+}
+
 textarea, select, input[type="text"] {
   font-size: 1rem;
   padding: 0.6rem;
@@ -152,18 +158,31 @@ textarea, select, input[type="text"] {
   box-sizing: border-box;
 }
 
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+ul li {
+  margin: 5px 0;
+}
+
+ul li a {
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+ul li a:hover {
+  color: var(--text-color); /* Hover color matches text color */
+}
+
+/* Calendar Styling */
 #calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
   padding-top: 1rem;
 }
-
-.calendar-day.disabled-day {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 
 #calendar-header {
   display: flex;
@@ -184,7 +203,6 @@ textarea, select, input[type="text"] {
   cursor: pointer;
 }
 
-
 .calendar-day {
   background-color: white;
   border: 1px solid #ddd;
@@ -197,6 +215,25 @@ textarea, select, input[type="text"] {
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
+/* Back to Top Button */
+#scrollButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+}
+
+#scrollButton:hover {
+  background-color: var(--text-color);
+}
+
+/* Delete Habit Button */
 .delete-habit {
   background-color: var(--accent-color); /* Button color matches theme */
   border: none;
@@ -217,40 +254,4 @@ textarea, select, input[type="text"] {
 
 .delete-habit:active {
   transform: scale(0.95);
-}
-
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  color: black;
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 16px;
-  font-size: 1.4rem;
-  cursor: pointer;
 }

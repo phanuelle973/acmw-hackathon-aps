@@ -112,17 +112,23 @@ function renderCalendar() {
     dayDiv.title = `Mood on ${dateKey}`;
   
     // Check if day is today or earlier
-    const todayStr = new Date().toISOString().split("T")[0];
-    if (dateKey <= todayStr) {
-      // ✅ Allow editing for past/today
+    const dayDate = new Date(year, month, day); // actual date of this box
+    const todayDate = new Date(); // right now
+    
+    // Remove time from both (optional, to be precise)
+    dayDate.setHours(0, 0, 0, 0);
+    todayDate.setHours(0, 0, 0, 0);
+    
+    if (dayDate <= todayDate) {
+      // ✅ Editable
       dayDiv.addEventListener("click", () => {
         showDayDetails(dateKey);
       });
     } else {
-      // ❌ Future day — visually dim
+      // 🚫 Future day
       dayDiv.classList.add("disabled-day");
     }
-  
+      
     grid.appendChild(dayDiv);
   }
   }
