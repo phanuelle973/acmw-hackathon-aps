@@ -102,7 +102,7 @@ function renderCalendar() {
   for (let day = 1; day <= daysInMonth; day++) {
     const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-
+  
     const dayDiv = document.createElement("div");
     dayDiv.className = "calendar-day";
     dayDiv.innerHTML = `
@@ -110,14 +110,22 @@ function renderCalendar() {
       <div class="calendar-mood">${mood}</div>
     `;
     dayDiv.title = `Mood on ${dateKey}`;
-
-    dayDiv.addEventListener("click", () => {
-      showDayDetails(dateKey);
-    });
-
+  
+    // Check if day is today or earlier
+    const todayStr = new Date().toISOString().split("T")[0];
+    if (dateKey <= todayStr) {
+      // ✅ Allow editing for past/today
+      dayDiv.addEventListener("click", () => {
+        showDayDetails(dateKey);
+      });
+    } else {
+      // ❌ Future day — visually dim
+      dayDiv.classList.add("disabled-day");
+    }
+  
     grid.appendChild(dayDiv);
   }
-}
+  }
 document.getElementById("prev-month").addEventListener("click", () => {
   calendarDate.setMonth(calendarDate.getMonth() - 1);
   renderCalendar();

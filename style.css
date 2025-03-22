@@ -10,29 +10,36 @@ body {
 
 /* Menu Bar Styles */
 nav {
-  background-color: #333;
-  padding: 10px;
+  background-color: var(--accent-color);  /* Make it theme-dependent */
+  padding: 15px 20px;
   text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border-radius: 8px;  /* Rounded corners */
 }
 
 .menu {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;  /* Space between menu items */
 }
 
 .menu li {
   display: inline;
-  margin: 0 15px;
 }
 
 .menu a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 1.2rem;  /* Slightly bigger font */
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .menu a:hover {
+  color: var(--text-color);  /* Hover effect that matches text color */
   text-decoration: underline;
 }
 
@@ -151,6 +158,12 @@ textarea, select, input[type="text"] {
   gap: 10px;
   padding-top: 1rem;
 }
+
+.calendar-day.disabled-day {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 #calendar-header {
   display: flex;
