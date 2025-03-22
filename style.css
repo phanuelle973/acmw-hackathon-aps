@@ -170,8 +170,7 @@ textarea, select, input[type="text"] {
 }
 
 .delete-habit:hover {
-  background-color: var(--accent-color);  /* Keep the background the same */
-  color: var(--text-color); /* Font color based on the theme */
+  background-color: var(--text-color);  /* Keep the background the same */
   transform: scale(1.1);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
