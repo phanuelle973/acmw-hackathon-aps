@@ -18,6 +18,66 @@ saveJournal.addEventListener("click", () => {
   journalEntry.value = "";
 });
 
+// Habit tracker
+// Get elements from HTML
+const habitList = document.getElementById('habit-list');
+const addHabitButton = document.getElementById('add-habit-button');
+const newHabitInput = document.getElementById('new-habit-input');
+
+// Get saved habits from localStorage or set to empty array if none exist
+let habits = JSON.parse(localStorage.getItem('habits')) || [];
+
+// Function to display habits in the list
+function displayHabits() {
+  habitList.innerHTML = ''; // Clear current list
+
+  habits.forEach(habit => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" class="habit-checkbox" data-habit="${habit}" />
+        ${habit}
+      </label>
+    `;
+    habitList.appendChild(li);
+
+    // Attach event listener for each checkbox
+    const checkbox = li.querySelector('input');
+    checkbox.addEventListener('change', () => {
+      const habitKey = `habit-${habit}`;
+      localStorage.setItem(habitKey, checkbox.checked);
+    });
+
+    // Load saved checkbox state
+    const saved = localStorage.getItem(`habit-${habit}`);
+    if (saved === "true") {
+      checkbox.checked = true;
+    }
+  });
+}
+
+// Function to add a new habit
+addHabitButton.addEventListener('click', () => {
+  const newHabit = newHabitInput.value.trim();
+
+  if (newHabit && !habits.includes(newHabit)) {
+    habits.push(newHabit);  // Add new habit to the habits array
+    localStorage.setItem('habits', JSON.stringify(habits));  // Save to localStorage
+    newHabitInput.value = '';  // Clear the input field
+    displayHabits();  // Refresh the displayed list
+  } else if (!newHabit) {
+    alert('Please enter a habit!');
+  } else {
+    alert('This habit already exists!');
+  }
+});
+
+// Initialize habit list display on page load
+document.addEventListener('DOMContentLoaded', () => {
+  displayHabits();  // Display saved habits when the page loads
+});
+
+
 function renderCalendar() {
   const grid = document.getElementById("calendar-grid");
   grid.innerHTML = "";
