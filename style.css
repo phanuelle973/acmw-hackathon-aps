@@ -152,6 +152,26 @@ textarea, select, input[type="text"] {
   padding-top: 1rem;
 }
 
+#calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#calendar-header button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+
+
 .calendar-day {
   background-color: white;
   border: 1px solid #ddd;

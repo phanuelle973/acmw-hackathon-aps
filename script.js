@@ -118,6 +118,16 @@ function renderCalendar() {
     grid.appendChild(dayDiv);
   }
 }
+document.getElementById("prev-month").addEventListener("click", () => {
+  calendarDate.setMonth(calendarDate.getMonth() - 1);
+  renderCalendar();
+});
+
+document.getElementById("next-month").addEventListener("click", () => {
+  calendarDate.setMonth(calendarDate.getMonth() + 1);
+  renderCalendar();
+});
+
 
 // =========================
 // View Day Details
@@ -156,6 +166,44 @@ themeSelect.addEventListener("change", () => {
 const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
+
+// Track which month is being viewed
+let calendarDate = new Date(); // starts as current date
+
+function renderCalendar() {
+  const grid = document.getElementById("calendar-grid");
+  const monthLabel = document.getElementById("month-label");
+  grid.innerHTML = "";
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Update label (e.g., March 2025)
+  const monthName = calendarDate.toLocaleString("default", { month: "long" });
+  monthLabel.textContent = `${monthName} ${year}`;
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
+
+    const dayDiv = document.createElement("div");
+    dayDiv.className = "calendar-day";
+    dayDiv.innerHTML = `
+      <div class="calendar-date">${day}</div>
+      <div class="calendar-mood">${mood}</div>
+    `;
+    dayDiv.title = `Mood on ${dateKey}`;
+
+    // Click to view/edit that day’s data
+    dayDiv.addEventListener("click", () => {
+      showDayDetails(dateKey);
+    });
+
+    grid.appendChild(dayDiv);
+  }
+}
+
 
 // =========================
 // Load on Startup
