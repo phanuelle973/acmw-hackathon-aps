@@ -214,6 +214,11 @@ ul li a:hover {
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
+.calendar-day.disabled-day {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 /* Back to Top Button */
 #scrollButton {
