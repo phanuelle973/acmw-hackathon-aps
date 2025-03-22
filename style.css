@@ -206,7 +206,7 @@ ul li a:hover {
 }
 
 .calendar-day {
-  background-color: white;
+  background-color: var(--bg-color);
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 0.5rem;
