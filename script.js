@@ -210,3 +210,64 @@ function renderCalendar() {
 // =========================
 updateSummary();
 renderCalendar();
+
+
+// Modal elements
+const modal = document.getElementById("edit-modal");
+const closeModal = document.getElementById("close-modal");
+const modalDate = document.getElementById("modal-date");
+const modalMood = document.getElementById("modal-mood");
+const modalJournal = document.getElementById("modal-journal");
+const modalHabitList = document.getElementById("modal-habit-list");
+const saveModal = document.getElementById("save-modal");
+
+let currentEditDate = "";
+
+// Open modal with data
+function showDayDetails(dateKey) {
+  currentEditDate = dateKey;
+  modalDate.textContent = dateKey;
+
+  modalMood.value = localStorage.getItem(`mood-${dateKey}`) || "";
+  modalJournal.value = localStorage.getItem(`journal-${dateKey}`) || "";
+
+  // Load habit checkboxes
+  modalHabitList.innerHTML = "";
+  habits.forEach(habit => {
+    const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = isChecked;
+    checkbox.dataset.habit = habit;
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${habit}`));
+    modalHabitList.appendChild(label);
+    modalHabitList.appendChild(document.createElement("br"));
+  });
+
+  modal.classList.remove("hidden");
+}
+
+// Save changes when modal is submitted
+saveModal.addEventListener("click", () => {
+  const mood = modalMood.value;
+  const journal = modalJournal.value;
+
+  localStorage.setItem(`mood-${currentEditDate}`, mood);
+  localStorage.setItem(`journal-${currentEditDate}`, journal);
+
+  document.querySelectorAll("#modal-habit-list input[type='checkbox']").forEach(cb => {
+    const habit = cb.dataset.habit;
+    const key = `habit-${currentEditDate}-${habit}`;
+    localStorage.setItem(key, cb.checked);
+  });
+
+  modal.classList.add("hidden");
+  renderCalendar();
+});
+
+// Close modal when "x" is clicked
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});

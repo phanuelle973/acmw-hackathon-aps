@@ -82,5 +82,34 @@
     </section>
         
   </div>
+
+<!-- Edit Day Modal -->
+<div id="edit-modal" class="modal hidden">
+  <div class="modal-content">
+    <span id="close-modal" class="close-button">&times;</span>
+    <h2>Edit Entry for <span id="modal-date"></span></h2>
+
+    <label for="modal-mood">Mood:</label>
+    <select id="modal-mood">
+      <option value="">Select your mood</option>
+      <option value="😊">😊 Happy</option>
+      <option value="😐">😐 Neutral</option>
+      <option value="😢">😢 Sad</option>
+      <option value="😠">😠 Angry</option>
+    </select>
+
+    <label for="modal-journal">Journal:</label>
+    <textarea id="modal-journal" placeholder="Write something..."></textarea>
+
+    <h3>Habits Completed</h3>
+    <div id="modal-habit-list">
+      <!-- Habits with checkboxes go here -->
+    </div>
+
+    <button id="save-modal">Save Changes</button>
+  </div>
+</div>
+
+
 </body>
 </html>
