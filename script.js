@@ -93,6 +93,12 @@ function renderCalendar() {
   });
 }
 
+
+
+
+
+
+
 // Theme switcher (class-based version)
 const themeSelect = document.getElementById("theme-select");
 
