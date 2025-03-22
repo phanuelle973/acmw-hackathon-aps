@@ -131,6 +131,86 @@ body {
   .theme-selector {
     margin-bottom: 1rem;
   }
-  
 
+/* ==== BASE STRUCTURE ==== */
+body {
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+section, .theme-selector {
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+button, select {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ==== BLUE THEME ==== */
+body.theme-blue {
+  background-color: #e6f0ff;
+  color: #1e3a8a;
+}
+
+body.theme-blue section {
+  background-color: #ffffff;
+}
+
+body.theme-blue button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+body.theme-blue select {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+/* ==== PURPLE THEME ==== */
+body.theme-purple {
+  background-color: #f3e8ff;
+  color: #5b21b6;
+}
+
+body.theme-purple section {
+  background-color: #fdf4ff;
+}
+
+body.theme-purple button {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+body.theme-purple select {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+/* ==== PINK THEME ==== */
+body.theme-pink {
+  background-color: #fff0f5;
+  color: #9d174d;
+}
+
+body.theme-pink section {
+  background-color: #fff1f2;
+}
+
+body.theme-pink button {
+  background-color: #ec4899;
+  color: white;
+}
+
+body.theme-pink select {
+  background-color: #fbcfe8;
+  color: #9d174d;
+}
+  
 

@@ -104,3 +104,19 @@ themeSelect.addEventListener("change", () => {
 const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
+
+
+function applyTheme(theme) {
+  const body = document.body;
+  body.classList.remove("theme-blue", "theme-purple", "theme-pink");
+  body.classList.add(`theme-${theme}`);
+  localStorage.setItem("meflect-theme", theme);
+}
+
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
+const savedTheme = localStorage.getItem("meflect-theme") || "blue";
+themeSelect.value = savedTheme;
+applyTheme(savedTheme);
