@@ -106,7 +106,7 @@ function applyTheme(theme) {
 themeSelect.addEventListener("change", () => {
   applyTheme(themeSelect.value);
 });
-
+ 
 const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 themeSelect.value = savedTheme;
 applyTheme(savedTheme);
