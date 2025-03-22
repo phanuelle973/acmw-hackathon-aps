@@ -36,68 +36,56 @@ function updateSummary() {
 // =========================
 // Habit Tracker
 // =========================
-const addHabitButton = document.getElementById('add-habit-button');
-const newHabitInput = document.getElementById('new-habit-input');
-const habitList = document.getElementById('habit-list');
+const habitList = document.getElementById("habit-list");
+const addHabitButton = document.getElementById("add-habit-button");
+const newHabitInput = document.getElementById("new-habit-input");
 
-let habits = JSON.parse(localStorage.getItem('habits')) || [];
+// Get saved habits from localStorage
+let habits = JSON.parse(localStorage.getItem("habits")) || [];
 
+// Function to display habits
 function displayHabits() {
-  habitList.innerHTML = '';
+  habitList.innerHTML = ""; // Clear list before reloading
   habits.forEach((habit, index) => {
-    const li = document.createElement('li');
-    const dateKey = today;
-
-    const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
-
-    li.innerHTML = `<label>
-  <input type="checkbox" data-habit="${habit}" />
-  <i class="fas fa-check"></i> ${habit}
-</label>
-<button class="delete-habit">X</button>`; // Clean "X"
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" data-habit="${habit}" />
+        ${habit}
+      </label>
+      <button class="delete-habit" data-index="${index}">X</button>
+    `;
 
     habitList.appendChild(li);
   });
-
-  // Delete habit logic
-  document.querySelectorAll('.delete-habit').forEach(button => {
-    button.addEventListener('click', (event) => {
-      const habitIndex = event.target.dataset.index;
-      habits.splice(habitIndex, 1);
-      localStorage.setItem('habits', JSON.stringify(habits));
-      displayHabits();
-    });
-  });
-
-  // Save habit checkbox status
-  document.querySelectorAll('#habit-list input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', (event) => {
-      const habitName = event.target.dataset.habit;
-      const isChecked = event.target.checked;
-      const dateKey = today;
-      localStorage.setItem(`habit-${dateKey}-${habitName}`, isChecked);
-    });
-  });
 }
 
-addHabitButton.addEventListener('click', () => {
+// Add new habit
+addHabitButton.addEventListener("click", () => {
   const newHabit = newHabitInput.value.trim();
 
   if (newHabit && !habits.includes(newHabit)) {
     habits.push(newHabit);
-    localStorage.setItem('habits', JSON.stringify(habits));
-    newHabitInput.value = '';
-    displayHabits();
-  } else if (!newHabit) {
-    alert('Please enter a habit!');
+    localStorage.setItem("habits", JSON.stringify(habits)); // Save to localStorage
+    newHabitInput.value = ""; // Clear input field
+    displayHabits(); // Refresh habit list
   } else {
-    alert('This habit already exists!');
+    alert("Enter a unique habit!");
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  displayHabits();
+// Delete habit using event delegation
+habitList.addEventListener("click", (event) => {
+  if (event.target.classList.contains("delete-habit")) {
+    const index = event.target.getAttribute("data-index");
+    habits.splice(index, 1); // Remove the correct habit
+    localStorage.setItem("habits", JSON.stringify(habits)); // Update localStorage
+    displayHabits(); // Refresh list
+  }
 });
+
+// Load habits when the page loads
+document.addEventListener("DOMContentLoaded", displayHabits);
 
 // =========================
 // Mood Calendar
