@@ -191,6 +191,9 @@ const deleteButton = document.getElementById("delete-entry");
 deleteButton.addEventListener("click", () => {
   if (!currentEditDate) return;
 
+  const confirmDelete = confirm(`Are you sure you want to delete your entry for ${currentEditDate}?`);
+  if (!confirmDelete) return;
+
   // Delete mood and journal
   localStorage.removeItem(`mood-${currentEditDate}`);
   localStorage.removeItem(`journal-${currentEditDate}`);
