@@ -159,22 +159,22 @@ textarea, select, input[type="text"] {
 }
 
 .delete-habit {
-  background-color: #ff6b6b; /* Softer red */
+  background-color: var(--accent-color); /* Use the theme's accent color */
   border: none;
   color: white;
-  font-size: 0.9rem; /* Smaller font */
-  padding: 3px 7px; /* Smaller button */
-  border-radius: 6px; /* Slightly rounded */
+  font-size: 0.9rem;
+  padding: 3px 7px;
+  border-radius: 6px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .delete-habit:hover {
-  background-color: #e63946; /* Deeper red */
-  transform: scale(1.1); /* Slight growth effect */
-  box-shadow: 0px 2px 6px rgba(230, 57, 70, 0.5); /* Soft shadow */
+  background-color: var(--accent-hover); /* A darker version of the accent color */
+  transform: scale(1.1);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .delete-habit:active {
-  transform: scale(0.95); /* Slight press effect */
+  transform: scale(0.95);
 }
