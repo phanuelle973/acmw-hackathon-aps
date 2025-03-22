@@ -169,7 +169,7 @@ function showDayDetails(dateKey) {
 // =========================
 // Theme Switching
 // =========================
-const themeSelect = document.getElementById("theme-select");
+const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 
 function applyTheme(theme) {
   const body = document.body;
@@ -178,13 +178,16 @@ function applyTheme(theme) {
   localStorage.setItem("meflect-theme", theme);
 }
 
-themeSelect.addEventListener("change", () => {
-  applyTheme(themeSelect.value);
-});
+applyTheme(savedTheme); // Apply theme on page load
 
-const savedTheme = localStorage.getItem("meflect-theme") || "blue";
-themeSelect.value = savedTheme;
-applyTheme(savedTheme);
+// Optional: if this page has a <select id="theme-select">
+const themeSelect = document.getElementById("theme-select");
+if (themeSelect) {
+  themeSelect.value = savedTheme;
+  themeSelect.addEventListener("change", () => {
+    applyTheme(themeSelect.value);
+  });
+}
 
 const deleteButton = document.getElementById("delete-entry");
 
