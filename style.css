@@ -67,6 +67,8 @@ button, select {
 body.theme-blue {
   background-color: #e6f0ff;
   color: #1e3a8a;
+  --accent-color: #3b82f6;  /* Blue */
+  --text-color: #1e3a8a;  /* Dark Blue (text color) */
 }
 
 body.theme-blue section {
@@ -87,6 +89,8 @@ body.theme-blue select {
 body.theme-purple {
   background-color: #f3e8ff;
   color: #5b21b6;
+  --accent-color: #8b5cf6;  /* Purple */
+  --text-color: #5b21b6;  /* Purple (text color) */
 }
 
 body.theme-purple section {
@@ -107,6 +111,8 @@ body.theme-purple select {
 body.theme-pink {
   background-color: #fff0f5;
   color: #9d174d;
+  --accent-color: #ec4899;  /* Pink */
+  --text-color: #9d174d;  /* Dark Pink (text color) */
 }
 
 body.theme-pink section {
