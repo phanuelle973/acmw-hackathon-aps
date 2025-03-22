@@ -121,50 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
     displayHabits();
   }
 
-  // =========================
-  // MOOD CALENDAR
-  // =========================
-  function renderCalendar() {
-    const grid = document.getElementById("calendar-grid");
-    const monthLabel = document.getElementById("month-label");
-    if (!grid || !monthLabel) return;
-
-    grid.innerHTML = "";
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    monthLabel.textContent = calendarDate.toLocaleString("default", { month: "long" }) + " " + year;
-
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-      const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-      const dayDate = new Date(year, month, day);
-      const now = new Date();
-      dayDate.setHours(0, 0, 0, 0);
-      now.setHours(0, 0, 0, 0);
-
-      const dayDiv = document.createElement("div");
-      dayDiv.className = "calendar-day";
-      dayDiv.innerHTML = `
-        <div class="calendar-date">${day}</div>
-        <div class="calendar-mood">${mood}</div>
-      `;
-      dayDiv.title = `Mood on ${dateKey}`;
-
-      if (dayDate <= now) {
-        dayDiv.addEventListener("click", () => showDayDetails(dateKey));
-      } else {
-        dayDiv.classList.add("disabled-day");
-      }
-
-      grid.appendChild(dayDiv);
-
-      renderMoodChart();
-
-    }
-  }
-
   document.getElementById("prev-month")?.addEventListener("click", () => {
     calendarDate.setMonth(calendarDate.getMonth() - 1);
     renderCalendar();
@@ -237,15 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCalendar();
   });
 
-  let moodChart;
-  let moodChartRange = "month"; // default
-
-  function setMoodChartRange(range) {
-    moodChartRange = range;
-    renderMoodChart();
-  }
-  
-  
   function renderMoodChart() {
     const ctx = document.getElementById("moodChart")?.getContext("2d");
     if (!ctx) return;
@@ -322,6 +269,62 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+
+  // =========================
+  // MOOD CALENDAR
+  // =========================
+  function renderCalendar() {
+    const grid = document.getElementById("calendar-grid");
+    const monthLabel = document.getElementById("month-label");
+    if (!grid || !monthLabel) return;
+
+    grid.innerHTML = "";
+    const year = calendarDate.getFullYear();
+    const month = calendarDate.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    monthLabel.textContent = calendarDate.toLocaleString("default", { month: "long" }) + " " + year;
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
+      const dayDate = new Date(year, month, day);
+      const now = new Date();
+      dayDate.setHours(0, 0, 0, 0);
+      now.setHours(0, 0, 0, 0);
+
+      const dayDiv = document.createElement("div");
+      dayDiv.className = "calendar-day";
+      dayDiv.innerHTML = `
+        <div class="calendar-date">${day}</div>
+        <div class="calendar-mood">${mood}</div>
+      `;
+      dayDiv.title = `Mood on ${dateKey}`;
+
+      if (dayDate <= now) {
+        dayDiv.addEventListener("click", () => showDayDetails(dateKey));
+      } else {
+        dayDiv.classList.add("disabled-day");
+      }
+
+      grid.appendChild(dayDiv);
+
+      renderMoodChart();
+
+    }
+  }
+
+
+  let moodChart;
+  let moodChartRange = "month"; // default
+
+  function setMoodChartRange(range) {
+    moodChartRange = range;
+    renderMoodChart(); // re-render with the selected range
+  }
+    
+  
   
 
   // =========================
