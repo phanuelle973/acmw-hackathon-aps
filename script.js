@@ -1,11 +1,11 @@
+// === Mood Chart Globals ===
 let moodChart;
-let moodChartRange = "month"; // default
+let moodChartRange = "month"; // Default range
 
 function setMoodChartRange(range) {
   moodChartRange = range;
-  renderMoodChart(); // re-render with the selected range
+  renderMoodChart();
 }
-  
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
@@ -210,10 +210,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = [];
     const data = [];
   
-    const getDateKey = (date) =>
-      date.toISOString().split("T")[0];
+    const getDateKey = (date) => date.toISOString().split("T")[0];
   
-    // Generate data based on selected range
     let startDate;
     if (moodChartRange === "week") {
       startDate = new Date(now);
@@ -227,8 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const date = new Date(startDate);
     while (date <= now) {
       const key = getDateKey(date);
-      const moodEmoji = localStorage.getItem(`mood-${key}`);
-      const score = moodScores[moodEmoji] || null;
+      const mood = localStorage.getItem(`mood-${key}`);
+      const score = moodScores[mood] || null;
   
       labels.push(key);
       data.push(score);
@@ -252,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
           data,
           fill: false,
           borderColor: "#3b82f6",
-          tension: 0.2,
+          tension: 0.3,
           pointBackgroundColor: "#3b82f6"
         }]
       },
@@ -278,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+  
 
   // =========================
   // MOOD CALENDAR
