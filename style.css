@@ -159,9 +159,9 @@ textarea, select, input[type="text"] {
 }
 
 .delete-habit {
-  background-color: var(--accent-color); /* Matches theme color */
+  background-color: var(--accent-color); /* Button color matches theme */
   border: none;
-  color: white;
+  color: white; /* White text */
   font-size: 0.9rem;
   padding: 3px 7px;
   border-radius: 6px;
@@ -170,8 +170,8 @@ textarea, select, input[type="text"] {
 }
 
 .delete-habit:hover {
-  background-color: var(--text-color);  /* Keep the background the same */
-  color: var(--text-color); /* Font color based on the theme */
+  background-color: var(--text-color); /* Background color matches text color */
+  color: white; /* Keep text white */
   transform: scale(1.1);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
