@@ -1,3 +1,5 @@
+/* Base and Theme Styles */
+
 /* Basic Body Style */
 body {
   font-family: 'Inter', sans-serif;
@@ -10,34 +12,26 @@ body {
 
 /* Menu Bar Styles */
 nav {
-  background-color: var(--accent-color); /* Use theme accent color */
-  padding: 15px;
+  background-color: #333;
+  padding: 10px;
   text-align: center;
-}
-
-.menu-container {
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 .menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
 }
 
 .menu li {
   display: inline;
+  margin: 0 15px;
 }
 
 .menu a {
   color: white;
   text-decoration: none;
   font-size: 18px;
-  font-weight: 600;
 }
 
 .menu a:hover {
@@ -46,9 +40,12 @@ nav {
 
 /* Container for your content */
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Section Styling */
@@ -137,82 +134,84 @@ body.theme-pink select {
   color: #9d174d;
 }
 
-/* Additional general section and layout styling */
+/* ===== MENTAL HEALTH RESOURCES PAGE ===== */
+
+/* General Styles */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: var(--text-color);
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-  font-size: 1.5rem;
-  color: var(--text-color); /* Match text color to theme */
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
 }
 
-textarea, select, input[type="text"] {
-  font-size: 1rem;
-  padding: 0.6rem;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #555;
 }
 
 ul {
-  margin-top: 10px;
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
 }
 
 ul li {
-  margin: 5px 0;
+  margin: 10px 0;
+  font-size: 1.1rem;
 }
 
 ul li a {
   color: var(--accent-color);
-  font-size: 1rem;
+  text-decoration: none;
 }
 
 ul li a:hover {
-  color: var(--text-color); /* Hover color matches text color */
+  color: var(--text-color);
+  text-decoration: underline;
 }
 
-/* Calendar Styling */
-#calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  padding-top: 1rem;
+/* Resource Sections */
+.resource-section {
+  margin-bottom: 2rem;
 }
 
-#calendar-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-#calendar-header button {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.3rem 0.7rem;
-  cursor: pointer;
-}
-
-.calendar-day {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0.5rem;
+.action-section {
   text-align: center;
+  background-color: var(--accent-color);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-button {
+  background-color: var(--text-color);
+  color: white;
+  padding: 1rem 2rem;
   font-size: 1.2rem;
-  min-height: 40px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: var(--accent-color);
 }
 
 /* Back to Top Button */
@@ -233,54 +232,8 @@ ul li a:hover {
   background-color: var(--text-color);
 }
 
-/* Delete Habit Button */
-.delete-habit {
-  background-color: var(--accent-color); /* Button color matches theme */
-  border: none;
-  color: white; /* White text */
-  font-size: 0.9rem;
-  padding: 3px 7px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+/* Scroll Button Visibility */
+#scrollButton.show {
+  display: block;
 }
 
-.delete-habit:hover {
-  background-color: var(--text-color); /* Background color matches text color */
-  color: white; /* Keep text white */
-  transform: scale(1.1);
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.delete-habit:active {
-  transform: scale(0.95);
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
