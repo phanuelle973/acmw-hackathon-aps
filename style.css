@@ -96,6 +96,41 @@ body {
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
   
+  :root {
+    --bg-color: #f0f4f8;
+    --text-color: #222;
+    --accent-color: #3b82f6; /* default blue */
+    --card-bg: white;
+    --shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  section {
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 12px var(--shadow);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  /* Optional: nicer dropdown style */
+  .theme-selector {
+    margin-bottom: 1rem;
+  }
   
 
 

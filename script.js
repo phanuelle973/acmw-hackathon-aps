@@ -72,3 +72,35 @@ moodSelect.addEventListener("change", () => {
 
 updateSummary();
 renderCalendar(); // at the end of your script
+
+
+const themeSelect = document.getElementById("theme-select");
+
+function applyTheme(theme) {
+  switch (theme) {
+    case "blue":
+      document.documentElement.style.setProperty("--bg-color", "#e6f0ff");
+      document.documentElement.style.setProperty("--accent-color", "#3b82f6");
+      break;
+    case "purple":
+      document.documentElement.style.setProperty("--bg-color", "#f0eaff");
+      document.documentElement.style.setProperty("--accent-color", "#8b5cf6");
+      break;
+    case "pink":
+      document.documentElement.style.setProperty("--bg-color", "#fff0f5");
+      document.documentElement.style.setProperty("--accent-color", "#ec4899");
+      break;
+  }
+
+  localStorage.setItem("meflect-theme", theme);
+}
+
+themeSelect.addEventListener("change", () => {
+  const selected = themeSelect.value;
+  applyTheme(selected);
+});
+
+// Load saved theme on page load
+const savedTheme = localStorage.getItem("meflect-theme") || "blue";
+themeSelect.value = savedTheme;
+applyTheme(savedTheme);

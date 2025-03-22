@@ -13,7 +13,15 @@
 <body>
   <div class="container">
     <h1>HackTracker 🧠</h1>
-
+    <div class="theme-selector">
+      <label for="theme-select">Theme: </label>
+      <select id="theme-select">
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+        <option value="pink">Pink</option>
+      </select>
+    </div>
+    
     <section id="mood-section">
       <h2>Mood Tracker</h2>
       <select id="mood-select">
@@ -65,7 +73,7 @@
       <h2>Mood Calendar</h2>
       <div id="calendar-grid"></div>
     </section>
-    
+
   </div>
 
   <script src="script.js"></script>
