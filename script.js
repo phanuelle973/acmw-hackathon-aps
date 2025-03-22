@@ -367,6 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       grid.appendChild(dayDiv);
     }
+    renderMoodChart();
   }
   
 
