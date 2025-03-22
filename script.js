@@ -2,10 +2,10 @@
 let moodChart;
 let moodChartRange = "month"; // Default range
 
-function setMoodChartRange(range) {
+window.setMoodChartRange = function(range) {
   moodChartRange = range;
   renderMoodChart();
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
