@@ -30,6 +30,7 @@ document.querySelectorAll("#habit-list input").forEach((checkbox) => {
   if (saved === "true") checkbox.checked = true;
 });
 
+// Add New Habit functionality
 const addHabitButton = document.getElementById('add-habit-button');
 const newHabitInput = document.getElementById('new-habit-input');
 const habitList = document.getElementById('habit-list');
@@ -47,6 +48,17 @@ function displayHabits() {
       <i class="fas fa-check"></i> ${habit}
     </label>`;
     habitList.appendChild(li);
+
+    // Attach event listener for each checkbox
+    const checkbox = li.querySelector('input');
+    checkbox.addEventListener("change", () => {
+      const habitKey = `habit-${today}-${habit}`;
+      localStorage.setItem(habitKey, checkbox.checked);
+    });
+
+    // Load saved state of each habit
+    const saved = localStorage.getItem(`habit-${today}-${habit}`);
+    if (saved === "true") checkbox.checked = true;
   });
 }
 
