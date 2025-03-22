@@ -225,15 +225,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const date = new Date(startDate);
     while (date <= now) {
       const key = getDateKey(date);
-      const mood = localStorage.getItem(`mood-${key}`);
-      const score = moodScores[mood] || null;
-  
-      labels.push(key);
-      data.push(score);
-  
+      const moodEmoji = localStorage.getItem(`mood-${key}`);
+      const score = moodScores[moodEmoji];
+    
+      if (score) {
+        labels.push(key);
+        data.push(score);
+      }
+    
       date.setDate(date.getDate() + 1);
     }
-  
+      
     if (moodChart) {
       moodChart.data.labels = labels;
       moodChart.data.datasets[0].data = data;
@@ -316,10 +318,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       grid.appendChild(dayDiv);
-
-      renderMoodChart();
-
     }
+    renderMoodChart();
   }
 
 
