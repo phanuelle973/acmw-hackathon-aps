@@ -221,8 +221,8 @@ ul li a:hover {
   border: 2px solid var(--accent-color);
   font-weight: bold;
   background-color: #fff8e1; /* soft yellow highlight */
-} */
-
+}
+ */
 
 .calendar-day.disabled-day {
   opacity: 0.5;
