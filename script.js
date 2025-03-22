@@ -1,3 +1,12 @@
+let moodChart;
+let moodChartRange = "month"; // default
+
+function setMoodChartRange(range) {
+  moodChartRange = range;
+  renderMoodChart(); // re-render with the selected range
+}
+  
+
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // THEME SETUP
@@ -316,14 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  let moodChart;
-  let moodChartRange = "month"; // default
-
-  function setMoodChartRange(range) {
-    moodChartRange = range;
-    renderMoodChart(); // re-render with the selected range
-  }
-    
   
   
 
