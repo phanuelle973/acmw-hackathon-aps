@@ -27,11 +27,26 @@
 
     <section id="habit-section">
       <h2>Habit Checklist</h2>
-      <ul id="habit-list">
-        <li><label><input type="checkbox" data-habit="Drink Water" /> Drink Water</label></li>
-        <li><label><input type="checkbox" data-habit="Read" /> Read</label></li>
-        <li><label><input type="checkbox" data-habit="Exercise" /> Exercise</label></li>
-      </ul>
+        <ul id="habit-list">
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Drink Water" />
+              <i class="fas fa-water"></i> Drink Water
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Read" />
+              <i class="fas fa-book"></i> Read
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-habit="Exercise" />
+              <i class="fas fa-dumbbell"></i> Exercise
+            </label>
+          </li>
+        </ul>
     </section>
 
     <section id="journal-section">
@@ -45,6 +60,12 @@
       <p><strong>Mood:</strong> <span id="saved-mood">-</span></p>
       <p><strong>Journal:</strong> <span id="saved-journal">-</span></p>
     </section>
+
+    <section id="calendar-section">
+      <h2>Mood Calendar</h2>
+      <div id="calendar-grid"></div>
+    </section>
+    
   </div>
 
   <script src="script.js"></script>

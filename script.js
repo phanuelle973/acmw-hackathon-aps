@@ -39,3 +39,36 @@ function updateSummary() {
 }
 
 updateSummary();
+
+
+function renderCalendar() {
+  const grid = document.getElementById("calendar-grid");
+  grid.innerHTML = "";
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
+
+    const dayDiv = document.createElement("div");
+    dayDiv.className = "calendar-day";
+    dayDiv.textContent = `${day}\n${mood}`;
+    dayDiv.title = `Mood on ${dateKey}`;
+    grid.appendChild(dayDiv);
+  }
+}
+
+moodSelect.addEventListener("change", () => {
+  const selectedMood = moodSelect.value;
+  localStorage.setItem(`mood-${today}`, selectedMood);
+  updateSummary();
+  renderCalendar(); // ← refresh the calendar!
+});
+
+updateSummary();
+renderCalendar(); // at the end of your script
