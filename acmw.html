@@ -12,11 +12,14 @@
 </head>
 <body>
 
-  <!-- Add this to the body of your index.html, where you'd like the button to appear -->
-<button onclick="window.location.href='login.html'">Login</button>
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
 
-<!-- Add this to the body of your index.html -->
-<p>Already have an account? <a href="login.html">Login here</a></p>
 
   
   <div class="theme-selector">
@@ -41,7 +44,7 @@
 
     <section id="habit-section">
       <h2>Habit Checklist</h2>
-        <ul id="habit-list">
+        <ul id="habit-list">    
           <li>
             <label>
               <input type="checkbox" data-habit="Drink Water" />
@@ -49,18 +52,24 @@
             </label>
           </li>
           <li>
-            <label>
+            <label> 
               <input type="checkbox" data-habit="Read" />
               <i class="fas fa-book"></i> Read
             </label>
           </li>
           <li>
-            <label>
+            <label> 
               <input type="checkbox" data-habit="Exercise" />
               <i class="fas fa-dumbbell"></i> Exercise
             </label>
           </li>
         </ul>
+    </section>
+
+    <section id="add-habit-section">
+      <h2>Add New Habit</h2>
+      <input type="text" id="new-habit-input" placeholder="Enter new habit" />
+      <button id="add-habit-button">Add Habit</button>
     </section>
 
     <section id="journal-section">
