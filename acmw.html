@@ -48,6 +48,11 @@
 
     <section>
       <h2>Mood Trend (This Month)</h2>
+      <div class="chart-range-buttons">
+        <button onclick="setMoodChartRange('week')">Week</button>
+        <button onclick="setMoodChartRange('month')">Month</button>
+        <button onclick="setMoodChartRange('year')">Year</button>
+      </div>
       <canvas id="moodChart" height="100"></canvas>
     </section>
     

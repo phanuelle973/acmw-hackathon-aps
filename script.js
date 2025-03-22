@@ -238,74 +238,91 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   let moodChart;
+  let moodChartRange = "month"; // default
 
-function renderMoodChart() {
-  const ctx = document.getElementById("moodChart")?.getContext("2d");
-  if (!ctx) return;
-
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  const labels = [];
-  const data = [];
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    const moodEmoji = localStorage.getItem(`mood-${dateKey}`);
-    const score = moodScores[moodEmoji] || null;
-
-    labels.push(day);
-    data.push(score);
+  function setMoodChartRange(range) {
+    moodChartRange = range;
+    renderMoodChart();
   }
-
-  // If chart already exists, update it
-  if (moodChart) {
-    moodChart.data.labels = labels;
-    moodChart.data.datasets[0].data = data;
-    moodChart.update();
-    return;
-  }
-
-  // Create new chart
-  moodChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Mood Level (1 = 😠, 4 = 😊)",
-        data,
-        fill: false,
-        borderColor: "#3b82f6",
-        tension: 0.2,
-        pointBackgroundColor: "#3b82f6"
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          onClick: null // disable toggle
-        }
+  
+  
+  function renderMoodChart() {
+    const ctx = document.getElementById("moodChart")?.getContext("2d");
+    if (!ctx) return;
+  
+    const now = new Date();
+    const labels = [];
+    const data = [];
+  
+    const getDateKey = (date) =>
+      date.toISOString().split("T")[0];
+  
+    // Generate data based on selected range
+    let startDate;
+    if (moodChartRange === "week") {
+      startDate = new Date(now);
+      startDate.setDate(now.getDate() - 6);
+    } else if (moodChartRange === "month") {
+      startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    } else if (moodChartRange === "year") {
+      startDate = new Date(now.getFullYear(), 0, 1);
+    }
+  
+    const date = new Date(startDate);
+    while (date <= now) {
+      const key = getDateKey(date);
+      const moodEmoji = localStorage.getItem(`mood-${key}`);
+      const score = moodScores[moodEmoji] || null;
+  
+      labels.push(key);
+      data.push(score);
+  
+      date.setDate(date.getDate() + 1);
+    }
+  
+    if (moodChart) {
+      moodChart.data.labels = labels;
+      moodChart.data.datasets[0].data = data;
+      moodChart.update();
+      return;
+    }
+  
+    moodChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Mood Level (1 = 😠, 4 = 😊)",
+          data,
+          fill: false,
+          borderColor: "#3b82f6",
+          tension: 0.2,
+          pointBackgroundColor: "#3b82f6"
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          min: 0,
-          max: 5,
-          ticks: {
-            stepSize: 1,
-            callback: (val) => {
-              const map = { 1: "😠", 2: "😢", 3: "😐", 4: "😊" };
-              return map[val] || "";
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { onClick: null }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 5,
+            ticks: {
+              stepSize: 1,
+              callback: (val) => {
+                const map = { 1: "😠", 2: "😢", 3: "😐", 4: "😊" };
+                return map[val] || "";
+              }
             }
           }
         }
       }
-    }
-      });
-}
-
+    });
+  }
+  
 
   // =========================
   // INITIAL LOAD
