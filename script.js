@@ -140,6 +140,22 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCalendar();
   });
 
+  document.getElementById("week-btn")?.addEventListener("click", () => {
+    moodChartRange = "week";
+    renderMoodChart();
+  });
+  
+  document.getElementById("month-btn")?.addEventListener("click", () => {
+    moodChartRange = "month";
+    renderMoodChart();
+  });
+  
+  document.getElementById("year-btn")?.addEventListener("click", () => {
+    moodChartRange = "year";
+    renderMoodChart();
+  });
+  
+
   // =========================
   // MODAL & DETAIL VIEW
   // =========================
