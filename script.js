@@ -88,8 +88,16 @@ habitList.addEventListener("click", (event) => {
 document.addEventListener("DOMContentLoaded", displayHabits);
 document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("meflect-theme") || "blue";
-  applyTheme(savedTheme);
-});
+
+  function applyTheme(theme) {
+    const body = document.body;
+    body.classList.remove("theme-blue", "theme-purple", "theme-pink");
+    body.classList.add(`theme-${theme}`);
+    localStorage.setItem("meflect-theme", theme);
+  }
+  
+  applyTheme(savedTheme); // Apply on page load
+  });
 
 
 // =========================
