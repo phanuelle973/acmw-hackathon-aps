@@ -50,13 +50,11 @@ function displayHabits() {
 
     const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
 
-    li.innerHTML = `
-      <label>
-        <input type="checkbox" data-habit="${habit}" ${isChecked ? "checked" : ""} />
-        <i class="fas fa-check"></i> ${habit}
-      </label>
-      <button class="delete-habit" data-index="${index}">❌</button>
-    `;
+    li.innerHTML = `<label>
+  <input type="checkbox" data-habit="${habit}" />
+  <i class="fas fa-check"></i> ${habit}
+</label>
+<button class="delete-habit">X</button>`; // Clean "X"
 
     habitList.appendChild(li);
   });

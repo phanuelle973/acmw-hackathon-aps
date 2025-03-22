@@ -159,18 +159,22 @@ textarea, select, input[type="text"] {
 }
 
 .delete-habit {
-  background-color: #ff4d4d;
+  background-color: #ff6b6b; /* Softer red */
   border: none;
   color: white;
-  font-size: 1rem;
-  padding: 5px 10px;
-  border-radius: 50%;
+  font-size: 0.9rem; /* Smaller font */
+  padding: 3px 7px; /* Smaller button */
+  border-radius: 6px; /* Slightly rounded */
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .delete-habit:hover {
-  background-color: #d10000;
-  transform: scale(1.3);
-  box-shadow: 0px 0px 8px rgba(255, 77, 77, 0.6);
+  background-color: #e63946; /* Deeper red */
+  transform: scale(1.1); /* Slight growth effect */
+  box-shadow: 0px 2px 6px rgba(230, 57, 70, 0.5); /* Soft shadow */
+}
+
+.delete-habit:active {
+  transform: scale(0.95); /* Slight press effect */
 }
