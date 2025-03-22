@@ -283,6 +283,11 @@ function renderMoodChart() {
     },
     options: {
       responsive: true,
+      plugins: {
+        legend: {
+          onClick: null // disable toggle
+        }
+      },
       scales: {
         y: {
           beginAtZero: true,
@@ -298,7 +303,7 @@ function renderMoodChart() {
         }
       }
     }
-  });
+      });
 }
 
 
