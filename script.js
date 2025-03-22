@@ -86,6 +86,11 @@ habitList.addEventListener("click", (event) => {
 
 // Load habits when the page loads
 document.addEventListener("DOMContentLoaded", displayHabits);
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("meflect-theme") || "blue";
+  applyTheme(savedTheme);
+});
+
 
 // =========================
 // Mood Calendar
