@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - HackTracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Login to HackTracker</h1>
+    
+    <div class="form-container">
+      <!-- Login Form -->
+      <form id="login-form">
+        <h2>Login</h2>
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" required />
+        
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required />
+        
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signup-form">
+        <h2>Sign Up</h2>
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" required />
+        
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required />
+        
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <p>Forgot password? <a href="#">Reset</a></p>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
