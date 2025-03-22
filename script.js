@@ -111,27 +111,23 @@ function renderCalendar() {
     `;
     dayDiv.title = `Mood on ${dateKey}`;
   
-    // Check if day is today or earlier
-    const dayDate = new Date(year, month, day); // actual date of this box
-    const todayDate = new Date(); // right now
-    
-    // Remove time from both (optional, to be precise)
+    // ✅ Compare using actual Date objects
+    const dayDate = new Date(year, month, day);
+    const now = new Date();
     dayDate.setHours(0, 0, 0, 0);
-    todayDate.setHours(0, 0, 0, 0);
-    
-    if (dayDate <= todayDate) {
-      // ✅ Editable
+    now.setHours(0, 0, 0, 0);
+  
+    if (dayDate <= now) {
       dayDiv.addEventListener("click", () => {
         showDayDetails(dateKey);
       });
     } else {
-      // 🚫 Future day
       dayDiv.classList.add("disabled-day");
     }
-      
+  
     grid.appendChild(dayDiv);
   }
-  }
+}
 document.getElementById("prev-month").addEventListener("click", () => {
   calendarDate.setMonth(calendarDate.getMonth() - 1);
   renderCalendar();
