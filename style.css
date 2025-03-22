@@ -1,8 +1,8 @@
 /* Basic Body Style */
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f0f4f8;
-  color: #222;
+  background-color: var(--bg-color); /* ✅ dynamic background */
+  color: var(--text-color);          /* ✅ dynamic text color */
   margin: 0;
   padding: 0;
   transition: background-color 0.3s, color 0.3s;
@@ -73,7 +73,7 @@ button, select {
 
 /* ==== BLUE THEME ==== */
 body.theme-blue {
-  background-color: #e6f0ff;
+  --bg-color: #e6f0ff;
   color: #1e3a8a;
   --accent-color: #3b82f6;  /* Blue */
   --text-color: #1e3a8a;  /* Dark Blue (text color) */
@@ -95,7 +95,7 @@ body.theme-blue select {
 
 /* ==== PURPLE THEME ==== */
 body.theme-purple {
-  background-color: #f3e8ff;
+  --bg-color: #f3e8ff;
   color: #5b21b6;
   --accent-color: #8b5cf6;  /* Purple */
   --text-color: #5b21b6;  /* Purple (text color) */
@@ -117,7 +117,7 @@ body.theme-purple select {
 
 /* ==== PINK THEME ==== */
 body.theme-pink {
-  background-color: #fff0f5;
+  --bg-color: #fff0f5;
   color: #9d174d;
   --accent-color: #ec4899;  /* Pink */
   --text-color: #9d174d;  /* Dark Pink (text color) */
