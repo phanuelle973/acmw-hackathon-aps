@@ -303,22 +303,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("calendar-grid");
     const monthLabel = document.getElementById("month-label");
     if (!grid || !monthLabel) return;
-
+  
     grid.innerHTML = "";
+  
     const year = calendarDate.getFullYear();
     const month = calendarDate.getMonth();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    monthLabel.textContent = calendarDate.toLocaleString("default", { month: "long" }) + " " + year;
-
+    const firstDay = new Date(year, month, 1).getDay(); // 0 = Sunday, 1 = Monday...
+  
+    // Set the label like "March 2025"
+    monthLabel.textContent = calendarDate.toLocaleString("default", {
+      month: "long",
+      year: "numeric"
+    });
+  
+    // Add weekday headers
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    weekdays.forEach(day => {
+      const header = document.createElement("div");
+      header.className = "calendar-header";
+      header.textContent = day;
+      grid.appendChild(header);
+    });
+  
+    // Add empty placeholders before the first actual day
+    for (let i = 0; i < firstDay; i++) {
+      const placeholder = document.createElement("div");
+      placeholder.className = "calendar-day empty";
+      grid.appendChild(placeholder);
+    }
+  
+    // Add the actual days
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+  
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
       const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-      const dayDate = new Date(year, month, day);
-      const now = new Date();
-      dayDate.setHours(0, 0, 0, 0);
-      now.setHours(0, 0, 0, 0);
-
+  
       const dayDiv = document.createElement("div");
       dayDiv.className = "calendar-day";
       dayDiv.innerHTML = `
@@ -326,18 +348,20 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="calendar-mood">${mood}</div>
       `;
       dayDiv.title = `Mood on ${dateKey}`;
-
+  
+      const dayDate = new Date(year, month, day);
+      dayDate.setHours(0, 0, 0, 0);
+  
       if (dayDate <= now) {
         dayDiv.addEventListener("click", () => showDayDetails(dateKey));
       } else {
         dayDiv.classList.add("disabled-day");
       }
-
+  
       grid.appendChild(dayDiv);
     }
-    renderMoodChart();
   }
-
+  
 
   
   
