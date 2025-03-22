@@ -27,6 +27,10 @@ function updateSummary() {
     localStorage.getItem(`journal-${today}`) || "-";
 }
 
+// Get current date key
+const today = new Date().toISOString().split("T")[0];
+
+// Get elements for the habit tracker
 const addHabitButton = document.getElementById('add-habit-button');
 const newHabitInput = document.getElementById('new-habit-input');
 const habitList = document.getElementById('habit-list');
@@ -37,13 +41,27 @@ let habits = JSON.parse(localStorage.getItem('habits')) || [];
 // Function to display habits in the list
 function displayHabits() {
   habitList.innerHTML = '';  // Clear current list
-  habits.forEach(habit => {
+  habits.forEach((habit, index) => {
     const li = document.createElement('li');
-    li.innerHTML = `<label>
-      <input type="checkbox" data-habit="${habit}" />
-      <i class="fas fa-check"></i> ${habit}
-    </label>`;
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" data-habit="${habit}" />
+        <i class="fas fa-check"></i> ${habit}
+      </label>
+      <button class="delete-habit" data-index="${index}">❌</button>
+    `;
+
     habitList.appendChild(li);
+  });
+
+  // Attach delete functionality to each delete button
+  document.querySelectorAll('.delete-habit').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const habitIndex = event.target.dataset.index;
+      habits.splice(habitIndex, 1);  // Remove habit from array
+      localStorage.setItem('habits', JSON.stringify(habits));  // Update storage
+      displayHabits();  // Refresh list
+    });
   });
 }
 
