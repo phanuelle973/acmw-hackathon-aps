@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const savedTheme = localStorage.getItem("meflect-theme") || "blue";
 
+  const moodScores = {
+    "😠": 1,
+    "😢": 2,
+    "😐": 3,
+    "😊": 4
+  };
+  
+
   function applyTheme(theme) {
     document.body.classList.remove("theme-blue", "theme-purple", "theme-pink");
     document.body.classList.add(`theme-${theme}`);
@@ -151,6 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       grid.appendChild(dayDiv);
+
+      renderMoodChart();
+
     }
   }
 
@@ -225,6 +236,71 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("hidden");
     renderCalendar();
   });
+
+  let moodChart;
+
+function renderMoodChart() {
+  const ctx = document.getElementById("moodChart")?.getContext("2d");
+  if (!ctx) return;
+
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const labels = [];
+  const data = [];
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const moodEmoji = localStorage.getItem(`mood-${dateKey}`);
+    const score = moodScores[moodEmoji] || null;
+
+    labels.push(day);
+    data.push(score);
+  }
+
+  // If chart already exists, update it
+  if (moodChart) {
+    moodChart.data.labels = labels;
+    moodChart.data.datasets[0].data = data;
+    moodChart.update();
+    return;
+  }
+
+  // Create new chart
+  moodChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Mood Level (1 = 😠, 4 = 😊)",
+        data,
+        fill: false,
+        borderColor: "#3b82f6",
+        tension: 0.2,
+        pointBackgroundColor: "#3b82f6"
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 5,
+          ticks: {
+            stepSize: 1,
+            callback: (val) => {
+              const map = { 1: "😠", 2: "😢", 3: "😐", 4: "😊" };
+              return map[val] || "";
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
 
   // =========================
   // INITIAL LOAD
