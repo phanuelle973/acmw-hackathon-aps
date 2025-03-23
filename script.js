@@ -100,19 +100,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayHabits() {
     if (!habitList) return;
     habitList.innerHTML = "";
+    const today = new Date().toISOString().split("T")[0];
+  
     habits.forEach((habit, index) => {
       const li = document.createElement("li");
+  
+      const isChecked = localStorage.getItem(`habit-${today}-${habit}`) === "true";
+  
       li.innerHTML = `
         <label>
-          <input type="checkbox" data-habit="${habit}" />
+          <input type="checkbox" data-habit="${habit}" ${isChecked ? "checked" : ""} />
           ${habit}
         </label>
         <button class="delete-habit" data-index="${index}">X</button>
       `;
+  
       habitList.appendChild(li);
     });
   }
-
+  
   if (addHabitButton && newHabitInput) {
     addHabitButton.addEventListener("click", () => {
       const newHabit = newHabitInput.value.trim();
@@ -185,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalHabitList.innerHTML = "";
     habits.forEach((habit) => {
-      const isChecked = localStorage.setItem(`habit-${dateKey}-${habit}`, checkbox.checked);
+      const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = isChecked;
