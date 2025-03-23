@@ -98,67 +98,67 @@ button, select {
 /* Add the blue, purple, and pink themes from your existing code */
 
 /* ==== BLUE THEME ==== */
-body.theme-blue {
+body.theme-blue-light {
   --bg-color: #e6f0ff;
   color: #1e3a8a;
   --accent-color: #3b82f6;  /* Blue */
   --text-color: #1e3a8a;  /* Dark Blue (text color) */
 }
 
-body.theme-blue section {
+body.theme-blue-light section {
   background-color: #ffffff;
 }
 
-body.theme-blue button {
+body.theme-blue-light button {
   background-color: #3b82f6;
   color: white;
 }
 
-body.theme-blue select {
+body.theme-blue-light select {
   background-color: #dbeafe;
   color: #1e3a8a;
 }
 
 /* ==== PURPLE THEME ==== */
-body.theme-purple {
+body.theme-purple-light {
   --bg-color: #f3e8ff;
   color: #5b21b6;
   --accent-color: #8b5cf6;  /* Purple */
   --text-color: #5b21b6;  /* Purple (text color) */
 }
 
-body.theme-purple section {
+body.theme-purple-light section {
   background-color: #fdf4ff;
 }
 
-body.theme-purple button {
+body.theme-purple-light button {
   background-color: #8b5cf6;
   color: white;
 }
 
-body.theme-purple select {
+body.theme-purple-light select {
   background-color: #ede9fe;
   color: #5b21b6;
 }
 
 /* ==== PINK THEME ==== */
-body.theme-pink {
+body.theme-pink-light {
   --bg-color: #fff0f5;
   color: #9d174d;
   --accent-color: #ec4899;  /* Pink */
   --text-color: #9d174d;  /* Dark Pink (text color) */
 }
 
-body.theme-pink section {
+body.theme-pink-light section {
   background-color: #fff1f2;
 }
 
-body.theme-pink button {
+body.theme-pink-light button {
   background-color: #ec4899;
   color: white;
 }
 
-body.theme-pink select {
+body.theme-pink-light select {
   background-color: #fbcfe8;
   color: #9d174d;
 }
