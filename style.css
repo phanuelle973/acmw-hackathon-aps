@@ -257,7 +257,7 @@ ul li a:hover {
 .habit-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* space between input and button */
+  gap: 3rem; /* space between input and button */
 }
 
 /* Delete Habit Button */
