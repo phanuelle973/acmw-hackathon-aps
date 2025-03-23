@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-      const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
+      const mood = localStorage.getItem(`mood-${dateKey}`);
     
       const dayDiv = document.createElement("div");
       dayDiv.className = "calendar-day";
