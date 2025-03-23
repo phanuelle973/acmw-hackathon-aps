@@ -165,7 +165,7 @@ body.theme-pink-light select {
 
 /* ==== BLUE DARK ==== */
 body.theme-blue-dark {
-  --bg-color: #0f172a;
+  --bg-color: #152752;
   --text-color: #dbeafe;
   --accent-color: #3b82f6;
   --card-bg: #1e293b;
@@ -173,7 +173,7 @@ body.theme-blue-dark {
 
 /* ==== PURPLE DARK ==== */
 body.theme-purple-dark {
-  --bg-color: #1e1b2e;
+  --bg-color: #312c4e;
   --text-color: #e9d5ff;
   --accent-color: #8b5cf6;
   --card-bg: #2b2540;
@@ -181,7 +181,7 @@ body.theme-purple-dark {
 
 /* ==== PINK DARK ==== */
 body.theme-pink-dark {
-  --bg-color: #2a1b23;
+  --bg-color: #452a38;
   --text-color: #fbcfe8;
   --accent-color: #ec4899;
   --card-bg: #3c2a36;
