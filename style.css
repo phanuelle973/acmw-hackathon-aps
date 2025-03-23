@@ -218,9 +218,10 @@ ul li a:hover {
 }
 
 .calendar-day.today {
-  border: 2px solid var(--accent-color);
-  font-weight: bold;
-  background-color: #fff8e1; /* soft yellow highlight */
+  outline: 2px solid #000;
+  outline-offset: -2px;
+  box-shadow: 0 0 0 2px #00000033;
+  border-radius: 8px;
 }
 
 
@@ -270,6 +271,23 @@ ul li a:hover {
 .delete-habit:active {
   transform: scale(0.95);
 }
+
+.mood-happy {
+  background-color: #d1f7c4;
+}
+
+.mood-neutral {
+  background-color: #fffacc;
+}
+
+.mood-sad {
+  background-color: #cce4ff;
+}
+
+.mood-angry {
+  background-color: #ffd1d1;
+}
+
 
 .modal {
   position: fixed;
