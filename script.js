@@ -74,15 +74,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateSummary() {
     const mood = localStorage.getItem(`mood-${today}`) || "-";
     const journal = localStorage.getItem(`journal-${today}`) || "-";
-
+  
     const moodDisplay = document.getElementById("saved-mood");
     const journalDisplay = document.getElementById("saved-journal");
-
+    const habitDisplay = document.getElementById("saved-habits"); // 👈 Add this
+  
     if (moodDisplay) moodDisplay.textContent = mood;
     if (journalDisplay) journalDisplay.textContent = journal;
+  
+    // ✅ NEW: Show completed habits for today
+    if (habitDisplay) {
+      const completed = habits.filter(habit => {
+        return localStorage.getItem(`habit-${today}-${habit}`) === "true";
+      });
+      habitDisplay.textContent = completed.length > 0 ? completed.join(", ") : "-";
+    }
   }
-
-  // =========================
+    // =========================
   // HABIT TRACKER
   // =========================
   const habitList = document.getElementById("habit-list");
