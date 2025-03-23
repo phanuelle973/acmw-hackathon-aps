@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // JOURNAL
   // =========================
   const journalEntry = document.getElementById("journal-entry");
-  const saveJournal = document.getElementById("save-journal");
+  const saveJournal = document.getElementById("save-journal-button");
 
   if (saveJournal && journalEntry) {
     saveJournal.addEventListener("click", () => {
