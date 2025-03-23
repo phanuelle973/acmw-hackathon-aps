@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(key, cb.checked);
     });
   
-    // ✅ If editing today's entry, update summary section
+    // ✅ Move this check outside the forEach loop
     const todayKey = new Date().toISOString().split("T")[0];
     if (currentEditDate === todayKey) {
       updateSummary();
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("hidden");
     renderCalendar();
   });
-  
+    
   closeModal?.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
