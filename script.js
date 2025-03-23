@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentEditDate === todayKey) {
       updateSummary();
     }
-  
+      
     modal.classList.add("hidden");
     renderCalendar();
   });
