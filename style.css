@@ -8,6 +8,31 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+body.theme-dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #bb86fc;
+  --card-bg: #1e1e1e;
+}
+
+body.theme-dark section {
+  background-color: var(--card-bg);
+}
+
+body.theme-dark button {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+body.theme-dark select,
+body.theme-dark input,
+body.theme-dark textarea {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+
 /* Menu Bar Styles */
 nav {
   background-color: var(--accent-color); /* Use theme accent color */

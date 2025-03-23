@@ -22,11 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   function applyTheme(theme) {
-    document.body.classList.remove("theme-blue", "theme-purple", "theme-pink");
+    document.body.className = ""; // clear old themes
     document.body.classList.add(`theme-${theme}`);
     localStorage.setItem("meflect-theme", theme);
+  
+    // Sync the dark mode toggle if it exists
+    const darkToggle = document.getElementById("dark-mode-toggle");
+    if (darkToggle) {
+      darkToggle.checked = theme === "dark";
+    }
   }
-
+  const darkToggle = document.getElementById("dark-mode-toggle");
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", () => {
+      applyTheme(darkToggle.checked ? "dark" : "blue"); // or keep last selected non-dark theme
+    });
+  }
+    
   applyTheme(savedTheme);
 
   const themeSelect = document.getElementById("theme-select");
