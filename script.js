@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  
+
 
   document.getElementById("prev-month")?.addEventListener("click", () => {
     calendarDate.setMonth(calendarDate.getMonth() - 1);
