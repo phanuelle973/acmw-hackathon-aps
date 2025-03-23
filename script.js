@@ -72,23 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateSummary() {
-    const today = new Date().toISOString().split("T")[0];
     const mood = localStorage.getItem(`mood-${today}`) || "-";
     const journal = localStorage.getItem(`journal-${today}`) || "-";
+    const completed = habits.filter(habit =>
+      localStorage.getItem(`habit-${today}-${habit}`) === "true"
+    );
   
-    const moodDisplay = document.getElementById("saved-mood");
-    const journalDisplay = document.getElementById("saved-journal");
-    const habitDisplay = document.getElementById("saved-habits");
-  
-    if (moodDisplay) moodDisplay.textContent = mood;
-    if (journalDisplay) journalDisplay.textContent = journal;
-  
-    if (habitDisplay) {
-      const completed = habits.filter(habit => localStorage.getItem(`habit-${today}-${habit}`) === "true");
-      habitDisplay.textContent = completed.length > 0 ? completed.join(", ") : "-";
-    }
+    document.getElementById("saved-mood").textContent = mood;
+    document.getElementById("saved-journal").textContent = journal;
+    document.getElementById("saved-habits").textContent =
+      completed.length ? completed.join(", ") : "-";
   }
-      // =========================
+        // =========================
   // HABIT TRACKER
   // =========================
   const habitList = document.getElementById("habit-list");
@@ -219,19 +214,29 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("hidden");
   }
 
-  saveModal?.addEventListener("click", () => {
+  saveModal.addEventListener("click", () => {
     if (!currentEditDate) return;
+  
+    // Save mood & journal
     localStorage.setItem(`mood-${currentEditDate}`, modalMood.value);
     localStorage.setItem(`journal-${currentEditDate}`, modalJournal.value);
-    
+  
+    // Save completed habits
     document.querySelectorAll("#modal-habit-list input[type='checkbox']").forEach(cb => {
       const key = `habit-${currentEditDate}-${cb.dataset.habit}`;
       localStorage.setItem(key, cb.checked);
     });
-        modal.classList.add("hidden");
+  
+    // ✅ If editing today's entry, update summary section
+    const todayKey = new Date().toISOString().split("T")[0];
+    if (currentEditDate === todayKey) {
+      updateSummary();
+    }
+  
+    modal.classList.add("hidden");
     renderCalendar();
   });
-
+  
   closeModal?.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
