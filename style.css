@@ -406,6 +406,12 @@ ul li a:hover {
   align-items: center;
 }
 
+.navbar-left a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+
 .logo {
   height: 60px;
   width: auto;

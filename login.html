@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meflect - Login</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="login.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="icon" href="ME_FLECT.png" type="image/png">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="navbar-left">
-            <img src="ME_FLECT.png" alt="MEFLECT logo" class="logo" width="50"/>
-        </div>
-        <ul class="navbar-menu">
+            <a href="acmw.html">
+                <img src="assets/logo.png" alt="Meflect Logo" class="logo">
+              </a>
+                </div>
+              <ul class="navbar-menu">
             <li><a href="acmw.html">Home</a></li>
             <li><a href="sources.html">Resources</a></li>
             <li><a href="login.html">Login</a></li>
@@ -22,41 +24,38 @@
         </ul>
     </nav>
       
-    <div class="container">
-        <h1>Login to MEFLECT</h1>
+  <div class="container">
+    <h1>Login to MEFLECT</h1>
+    
+    <div class="form-container">
+      <!-- Login Form -->
+      <form id="login-form">
+        <h2>Login</h2>
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" required />
         
-        <div class="form-container">
-            <!-- Login Form -->
-            <form id="login-form">
-                <h2>Login</h2>
-                <label for="login-email">Email:</label>
-                <input type="email" id="login-email" required />
-                
-                <label for="login-password">Password:</label>
-                <input type="password" id="login-password" required />
-                
-                <button type="submit">Login</button>
-            </form>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required />
+        
+        <button type="submit">Login</button>
+      </form>
 
-            <!-- Signup Form -->
-            <form id="signup-form">
-                <h2>Sign Up</h2>
-                <label for="signup-name">Name:</label>
-                <input type="text" id="signup-name" required />
-                
-                <label for="signup-email">Email:</label>
-                <input type="email" id="signup-email" required />
-                
-                <label for="signup-password">Password:</label>
-                <input type="password" id="signup-password" required />
-                
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-
-        <p>Forgot password? <a href="#">Reset</a></p>
-        <p>Already have an account? <a href="login.html">Login here</a></p>
+      <!-- Signup Form -->
+      <form id="signup-form">
+        <h2>Sign Up</h2>
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" required />
+        
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required />
+        
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
 
+    <p>Forgot password? <a href="#">Reset</a></p>
+  </div>
+
+  <script src="login.js"></script>
 </body>
 </html>
