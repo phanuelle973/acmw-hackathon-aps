@@ -21,32 +21,49 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
 
-  function applyTheme(theme) {
-    document.body.className = ""; // clear old themes
-    document.body.classList.add(`theme-${theme}`);
-    localStorage.setItem("meflect-theme", theme);
+  let currentColor = localStorage.getItem("meflect-color") || "blue";
+  let isDarkMode = JSON.parse(localStorage.getItem("meflect-dark")) || false;
   
-    // Sync the dark mode toggle if it exists
+  function applyTheme(color, darkMode) {
+    currentColor = color;
+    isDarkMode = darkMode;
+  
+    const themeClass = `theme-${color}-${darkMode ? "dark" : "light"}`;
+    document.body.className = ""; // Remove old theme classes
+    document.body.classList.add(themeClass);
+  
+    // Save preferences
+    localStorage.setItem("meflect-color", currentColor);
+    localStorage.setItem("meflect-dark", JSON.stringify(isDarkMode));
+  
+    // Sync toggle
     const darkToggle = document.getElementById("dark-mode-toggle");
     if (darkToggle) {
-      darkToggle.checked = theme === "dark";
+      darkToggle.checked = isDarkMode;
+    }
+  
+    const themeSelect = document.getElementById("theme-select");
+    if (themeSelect) {
+      themeSelect.value = currentColor;
     }
   }
-  const darkToggle = document.getElementById("dark-mode-toggle");
-  if (darkToggle) {
-    darkToggle.checked = savedTheme === "dark";
-    darkToggle.addEventListener("change", () => {
-      applyTheme(darkToggle.checked ? "dark" : "blue"); // or keep last selected non-dark theme
-    });
-  }
-    
-  applyTheme(savedTheme);
+  // On load
+  applyTheme(currentColor, isDarkMode);
 
+  // Listen for color change
   const themeSelect = document.getElementById("theme-select");
   if (themeSelect) {
-    themeSelect.value = savedTheme;
     themeSelect.addEventListener("change", () => {
-      applyTheme(themeSelect.value);
+      applyTheme(themeSelect.value, isDarkMode);
+    });
+  }
+
+  // Listen for dark toggle
+  const darkToggle = document.getElementById("dark-mode-toggle");
+  if (darkToggle) {
+    darkToggle.checked = isDarkMode;
+    darkToggle.addEventListener("change", () => {
+      applyTheme(currentColor, darkToggle.checked);
     });
   }
 
