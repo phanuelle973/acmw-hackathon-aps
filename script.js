@@ -85,13 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // ✅ NEW: Show completed habits for today
     if (habitDisplay) {
       const completed = habits.filter(habit => {
-        const stored = localStorage.getItem(`habit-${today}-${habit}`);
-        console.log(`habit-${today}-${habit}:`, stored); // ✅ debug
-        return stored === "true";
+        return localStorage.getItem(`habit-${today}-${habit}`) === "true";
       });
       habitDisplay.textContent = completed.length > 0 ? completed.join(", ") : "-";
     }
-    }
+  }
     // =========================
   // HABIT TRACKER
   // =========================
