@@ -141,6 +141,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    habitList?.addEventListener("change", (event) => {
+      if (event.target.type === "checkbox" && event.target.dataset.habit) {
+        const habit = event.target.dataset.habit;
+        const today = new Date().toISOString().split("T")[0];
+        localStorage.setItem(`habit-${today}-${habit}`, event.target.checked);
+        updateSummary();
+      }
+    });
+    
+
     displayHabits();
   }
 
