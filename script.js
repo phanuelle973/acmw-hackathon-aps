@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
     // ✅ Move this check outside the forEach loop
-    const today = new Date().toISOString().split("T")[0];
+    const todayKey = new Date().toISOString().split("T")[0];
     if (currentEditDate === todayKey) {
       updateSummary();
     }
