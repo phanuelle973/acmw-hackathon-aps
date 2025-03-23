@@ -340,9 +340,21 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
       const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
-  
+    
       const dayDiv = document.createElement("div");
-      // Assign mood-based class
+      dayDiv.className = "calendar-day";
+      dayDiv.innerHTML = `
+        <div class="calendar-date">${day}</div>
+        <div class="calendar-mood">${mood}</div>
+      `;
+      dayDiv.title = `Mood on ${dateKey}`;
+    
+      const dayDate = new Date(year, month, day);
+      dayDate.setHours(0, 0, 0, 0);
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+    
+      // ✅ Add mood color class
       if (mood === "😊") {
         dayDiv.classList.add("mood-happy");
       } else if (mood === "😐") {
@@ -352,26 +364,19 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (mood === "😠") {
         dayDiv.classList.add("mood-angry");
       }
-      dayDiv.className = "calendar-day";
-      dayDiv.innerHTML = `
-        <div class="calendar-date">${day}</div>
-        <div class="calendar-mood">${mood}</div>
-      `;
-      dayDiv.title = `Mood on ${dateKey}`;
-  
-      const dayDate = new Date(year, month, day);
-      dayDate.setHours(0, 0, 0, 0);
-      
+    
+      // ✅ Highlight today
       if (dayDate.getTime() === now.getTime()) {
         dayDiv.classList.add("today");
       }
-        
+    
+      // ✅ Enable past-day editing
       if (dayDate <= now) {
         dayDiv.addEventListener("click", () => showDayDetails(dateKey));
       } else {
         dayDiv.classList.add("disabled-day");
       }
-  
+    
       grid.appendChild(dayDiv);
     }
     renderMoodChart();
