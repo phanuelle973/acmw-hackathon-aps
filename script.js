@@ -340,6 +340,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
       const mood = localStorage.getItem(`mood-${dateKey}`) || "🕳️";
+  
+      const dayDiv = document.createElement("div");
       // Assign mood-based class
       if (mood === "😊") {
         dayDiv.classList.add("mood-happy");
@@ -350,8 +352,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (mood === "😠") {
         dayDiv.classList.add("mood-angry");
       }
-  
-      const dayDiv = document.createElement("div");
       dayDiv.className = "calendar-day";
       dayDiv.innerHTML = `
         <div class="calendar-date">${day}</div>
