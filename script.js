@@ -199,22 +199,23 @@ document.addEventListener("DOMContentLoaded", () => {
     modalDate.textContent = dateKey;
     modalMood.value = localStorage.getItem(`mood-${dateKey}`) || "";
     modalJournal.value = localStorage.getItem(`journal-${dateKey}`) || "";
-
+    
+    // Load habits
     modalHabitList.innerHTML = "";
-    habits.forEach((habit) => {
+    habits.forEach(habit => {
       const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+      const label = document.createElement("label");
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = isChecked;
       checkbox.dataset.habit = habit;
-
-      const label = document.createElement("label");
+    
       label.appendChild(checkbox);
       label.appendChild(document.createTextNode(` ${habit}`));
       modalHabitList.appendChild(label);
       modalHabitList.appendChild(document.createElement("br"));
     });
-
+    
     modal.classList.remove("hidden");
   }
 
@@ -222,11 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!currentEditDate) return;
     localStorage.setItem(`mood-${currentEditDate}`, modalMood.value);
     localStorage.setItem(`journal-${currentEditDate}`, modalJournal.value);
+    
     document.querySelectorAll("#modal-habit-list input[type='checkbox']").forEach(cb => {
       const key = `habit-${currentEditDate}-${cb.dataset.habit}`;
       localStorage.setItem(key, cb.checked);
     });
-    modal.classList.add("hidden");
+        modal.classList.add("hidden");
     renderCalendar();
   });
 
