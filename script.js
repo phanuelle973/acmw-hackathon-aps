@@ -209,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
       label.appendChild(document.createTextNode(` ${habit}`));
       modalHabitList.appendChild(label);
       modalHabitList.appendChild(document.createElement("br"));
+      updateSummary();
     });
     
     modal.classList.remove("hidden");
