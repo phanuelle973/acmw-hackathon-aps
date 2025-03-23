@@ -254,10 +254,10 @@ ul li a:hover {
   background-color: var(--text-color);
 }
 
-.habit-section {
+.habit-input-group {
   display: flex;
   flex-direction: column;
-  gap: 3rem; /* space between input and button */
+  gap: 0.75rem; /* space between input and button */
 }
 
 /* Delete Habit Button */
