@@ -85,11 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // ✅ NEW: Show completed habits for today
     if (habitDisplay) {
       const completed = habits.filter(habit => {
-        return localStorage.getItem(`habit-${today}-${habit}`) === "true";
+        const stored = localStorage.getItem(`habit-${today}-${habit}`);
+        console.log(`habit-${today}-${habit}:`, stored); // ✅ debug
+        return stored === "true";
       });
       habitDisplay.textContent = completed.length > 0 ? completed.join(", ") : "-";
     }
-  }
+    }
     // =========================
   // HABIT TRACKER
   // =========================
@@ -185,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalHabitList.innerHTML = "";
     habits.forEach((habit) => {
-      const isChecked = localStorage.getItem(`habit-${dateKey}-${habit}`) === "true";
+      const isChecked = localStorage.setItem(`habit-${dateKey}-${habit}`, checkbox.checked);
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = isChecked;
