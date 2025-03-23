@@ -292,6 +292,13 @@ ul li a:hover {
   background-color: #ffd1d1;
 }
 
+.mood-none {
+  background-color: #f0f0f0;
+  color: #999;
+  opacity: 0.7;
+}
+
+
 
 .modal {
   position: fixed;

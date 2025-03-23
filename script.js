@@ -363,8 +363,10 @@ document.addEventListener("DOMContentLoaded", () => {
         dayDiv.classList.add("mood-sad");
       } else if (mood === "😠") {
         dayDiv.classList.add("mood-angry");
+      } else {
+        dayDiv.classList.add("mood-none");  // 👈 for "🕳️" or no mood saved
       }
-    
+          
       // ✅ Highlight today
       if (dayDate.getTime() === now.getTime()) {
         dayDiv.classList.add("today");
