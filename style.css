@@ -221,7 +221,7 @@ ul li a:hover {
 .calendar-day.today {
   border: 2px solid var(--accent-color);
   font-weight: bold;
-  background-color: #fff8e1; /* soft yellow highlight */
+  /* background-color: #fff8e1; soft yellow highlight */
   outline: 2px solid #000;
   outline-offset: -2px;
   box-shadow: 0 0 0 2px #00000033;
